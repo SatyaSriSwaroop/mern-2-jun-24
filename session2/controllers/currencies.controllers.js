@@ -1,27 +1,37 @@
-const currenciesData = require("../../currencies.json");
+// const currenciesData = require("../../currencies.json");
+const axios = require("axios");
+// import currenciesData from "../../currencies.json" assert {type:'json'};
 
-const getCurrencies = (req, res) => {
+const getCurrencies = async(req, res) => {
     console.log(req.query);
     const {min_value} = req.query;
-    let reqCurrency = [];
-    
-    if(min_value)
-        reqCurrency = currenciesData.data.filter((currency) => currency.min_size === min_value);
-    else
-        reqCurrency = currenciesData.data;
 
-    if(reqCurrency.length === 0)
-        return res.status(404).send({message: "No currencies match"});
-    res.send(reqCurrency);
+    try{
+        const {data: currenciesData} = await axios.get('https:/api.coinbase.com/v2/currencies')
+        if(min_value)
+            return res.send(currenciesData.data.filter((currency) => currency.min_size === min_value));
+        res.send(currenciesData.data);
+    }
+    catch(error){
+        res.status(505).send({message: 'Problem in fetching data, retry!'});
+    }
 };
 
-const getCurrenciesbBySymbol = (req, res) => {
-    console.log(req.params.symbol)
-    const reqCurrency = currenciesData.data.find((currency) => currency.id.toLowerCase() === req.params.symbol.toLowerCase());
+const getCurrenciesbBySymbol = async(req, res) => {
+    const {symbol} = req.params;
+
+    try{
+        const {data: currenciesData} = await axios.get('https:/api.coinbase.com/v2/currencies')
+        const reqCurrency = await currenciesData.data.find((currency) => currency.id.toLowerCase() === symbol.toLowerCase());
     if(reqCurrency === undefined)
         res.status(404).send({message: "Invalid currency symbol"});
-    else
-        res.send(reqCurrency);
+
+        res.status(200).send(reqCurrency);
+    }
+    catch(error){
+        res.status(505).send({message: 'Problem in fetching data, retry!'});
+    }
 };
 
 module.exports = { getCurrencies, getCurrenciesbBySymbol}; //named exports
+// export { getCurrencies, getCurrenciesbBySymbol}; 
