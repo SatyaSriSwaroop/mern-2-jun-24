@@ -23,3 +23,13 @@ Authorization: LetMeIn
 ###
 GET http://localhost:8082/users/search
 Authorization: LetMeIn
+### Blogs
+POST http://localhost:8082/blogs
+Content-Type: application/json
+
+{
+    "title": "Travel blog on Exeter",
+    "authors": ["McNulty"],
+    "content": "Famous places to visit near river exe...",
+    "publishedAt": null
+}
