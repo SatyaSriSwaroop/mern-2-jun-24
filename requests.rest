@@ -28,8 +28,25 @@ POST http://localhost:8082/blogs
 Content-Type: application/json
 
 {
-    "title": "Travel blog on Exeter",
-    "authors": ["McNulty"],
-    "content": "Famous places to visit near river exe...",
+    "title": "Travel blog on Mussorie",
+    "authors": ["Aditya", "Alok", "Krushna"],
+    "content": "5 hidden gems of mussorie",
+    "publishedAt": null
+}
+###
+GET http://localhost:8082/blogs
+###
+GET http://localhost:8082/blogs/667234585cb76bd6a39b6971
+###
+DELETE http://localhost:8082/blogs/6674dbb13ad83227f38a65e2
+###
+PATCH http://localhost:8082/blogs/667234585cb76bd6a39b6971
+Content-Type: application/json
+
+{
+    "title": "Travel blog on Lake District",
+    "authors": ["Jhon Doe",
+    "Ritu"],
+    "content": "Most wonderful place in the UK....",
     "publishedAt": null
 }
