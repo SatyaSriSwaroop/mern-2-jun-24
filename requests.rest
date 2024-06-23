@@ -28,9 +28,15 @@ POST http://localhost:8082/blogs
 Content-Type: application/json
 
 {
-    "title": "Travel blog on Mussorie",
-    "authors": ["Aditya", "Alok", "Krushna"],
-    "content": "5 hidden gems of mussorie",
+    "title": "Travel blog on Mussorie 😊",
+    "authors": [
+    {
+    "fullName": "Aditya Singh",
+    "email": "aditya@resuminator.in",
+    "twitterHandle": "@_adityamadridsta_",
+    "image": "https://pbs.twimg.com/profile_images/1438358493799452672/vNWqLAHP_400x400.jpg"
+    }],
+    "content": "5 hidden gems of Mussorie",
     "publishedAt": null
 }
 ###
@@ -45,8 +51,30 @@ Content-Type: application/json
 
 {
     "title": "Travel blog on Lake District",
-    "authors": ["Jhon Doe",
-    "Ritu"],
-    "content": "Most wonderful place in the UK....",
+    "authors": [
+    {
+    "fullName": "John Doe",
+    "email": "john@resuminator.in",
+    "twitterHandle": "@_johndoe_",
+    "image": "https://pbs.twimg.com/profile_images/1438358493799452672/vNWqLAHP_400x400.jpg"
+    },
+    {
+    "fullName": "Jane Doe",
+    "email": "jane@resuminator.in",
+    "twitterHandle": "@_janedoe_",
+    "image": "https://pbs.twimg.com/profile_images/1438358493799452672/vNWqLAHP_400x400.jpg"
+}],
+    "content": "5 hidden gems of Lake district....",
     "publishedAt": null
 }
+###
+GET http://localhost:8082/blogs/search?title=travel%20blog%20on%20Lake%20District
+###
+GET http://localhost:8082/blogs/search?title=travel
+###
+GET http://localhost:8082/blogs/search?title=😊
+###
+GET http://localhost:8082/blogs/search?title=district&author=john@resuminator.in
+###
+GET http://localhost:8082/blogs/search?author=aditya@resuminator.in
+###
